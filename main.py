@@ -1,6 +1,9 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import *
+from asteroidfield import *
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -17,6 +20,14 @@ def main():
     y = SCREEN_HEIGHT / 2
     
     player = Player(x, y)
+    
+    group_asteroids = pygame.sprite.Group()
+    Asteroid.containers = (group_asteroids, updateable, drawable)
+    
+    AsteroidField.containers = (updateable)
+    
+    asteroid_field = AsteroidField()
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
